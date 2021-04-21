@@ -1,0 +1,310 @@
+/* 
+Name: Apple and Gold Consulting
+Developer: Akinbode Oluwatowo
+URL: www.agstore.com | localhost/agstore
+Version:1.0
+*/
+body{
+    margin-top:100px;
+    color:#555;
+}
+#wrapper{
+    padding-left:0px;
+}
+#page-wrapper{
+    width:100%;
+    padding:0;
+    background-color:#fff; /*body color fcfcfc*/
+    color:#555;
+} 
+
+@media(min-width:768px){
+    body{
+        margin-top:50px;
+       
+    }
+    #wrapper{
+        padding-left:255px;
+    }
+    #page-wrapper{
+     
+        padding:10px;
+       
+    } 
+    
+}
+
+/*TOP NAVIGATION*/
+.top-nav{
+    margin:10px 15px;
+    padding-right:50px;
+
+}
+.top-nav .dropdown-menu li a i{
+   margin-right:20px;
+} 
+.top-nav .dropdown-menu li a .badge{
+    font-size: 70%;
+    margin-top:-20px;
+}
+
+
+
+.top-nav>li{
+    float:left;
+    display:inline-block;
+}
+.top-nav>li>a{
+    color:#999;
+    line-height:20px;
+    padding:15px 0px;
+    padding-right:20px;
+}
+.top-nav>li>a:hover,
+.top-nav>li>a:focus{
+    color:#000;
+}
+.navbar .navbar-brand{
+    color:#555;
+}
+
+
+
+
+
+@media(max-width:380px){
+    .navbar .navbar-header{
+        padding: 10px 13px 0px 13px;
+    }
+    .navbar .navbar-brand{
+        font-weight: bold;
+     
+    }
+}
+
+/*SIDEBAR NAVIGATION*/
+@media(min-width:768px){
+    .side-nav{
+        position:fixed;
+        top:51px;
+        bottom:0;
+        width:255px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        background-color:#fff; /*222*/
+        padding-bottom:40px;
+        border-radius:0;
+    }
+    .side-nav>li>a{
+        width:255px;
+        color:#555; /*side nav color*/
+    }
+    .side-nav>li>a:hover,
+    .side-nav>li>a:focus{
+        outline:none;
+        background-color:#f3f3f3 !important;
+    }
+}
+
+
+@media(max-width:380px){
+    .navbar-header .navbar-toggle{
+        background-color:#555;
+      
+    }
+    .navbar-header .navbar-toggle .icon-bar{
+        background-color:#fff;
+
+    }
+
+    .side-nav>li>a{
+        color:#555; /*side nav color*/
+    }
+    .side-nav>li>ul>li>a{
+       
+        text-decoration:none;
+        color:#555; /*inner links*/
+        display:block;
+    
+    }
+    .side-nav>li>ul>li>a:hover{
+        background-color:#f3f3f3
+    }
+    .navbar .top-nav{
+        margin-top:-10px;
+        float:left;
+
+    }
+}
+
+
+
+
+.side-nav{
+    background-color:#fff; /*222*/
+
+}
+.side-nav>li>ul{
+    padding:0;
+}
+.side-nav>li>ul>li>a{
+    padding:10px 15px 10px 38px; 
+    text-decoration:none;
+    color:#555; /*inner links*/
+    display:block;
+
+}
+.side-nav>li>ul>li>a:hover{
+    background-color:#f3f3f3
+}
+
+
+
+
+
+/*DASHBOARD STYLES*/
+@media(max-width:380px){
+    .col{
+        padding: 0px 10px 10px 10px;
+    }
+    .row .page-header{
+       display:none;
+       
+    }
+    .col-lg-12{
+        margin-top:90px;
+    }
+}
+.huge{
+    font-size:40px;
+    line-height: normal;
+}
+.col .panel-green{
+    border-color:#5cd85c;
+}
+.panel-green>.panel-heading{
+    color:#fff;
+    background-color:#5cd85c;
+}
+.panel-green>a{
+    color:#5cd85c;
+}
+.panel-green>a:hover{
+    color:#3d8c3d;
+}
+
+
+.col .panel-red{
+    border-color:#d9534f;
+}
+.panel-red>.panel-heading{
+    color:#fff;
+    background-color:#d9534f;
+}
+.panel-red>a{
+    color:#d9534f;
+}
+.panel-red>a:hover{
+    color:#8d4341;
+}
+
+
+.col .panel-yellow{
+    border-color:#f0ad4e;
+}
+.panel-yellow>.panel-heading{
+    color:#fff;
+    background-color:#f0ad4e;
+}
+.panel-yellow>a{
+    color:#f0ad4e;
+}
+.panel-yellow>a:hover{
+    color:#ba8539;
+}
+
+/* ADMIN PROFILE IN DASHBOARD*/
+.panel-body{
+    border-radius:5px;
+}
+.thumb-info{
+    position:relative;
+}
+.rounded{
+    border-radius:10px;
+}
+hr .dotted{
+    border-bottom:1px #ddd dotted;
+    height:0px;
+    margin: 10px 0 10px 0;
+}
+.thumb-info .thumb-info-title{
+    background: rgba(36,27,28,0.9);
+    bottom:10%;
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    left:0;
+    letter-spacing:-1px;
+    padding:9px 11px 9px;
+    position:absolute;
+    text-transform:uppercase;
+    z-index:1;
+}
+.thumb-info .thumb-info-inner{
+    display:block;
+}
+.thumb-info .thumb-info-type{
+    background:#0088cc;
+    display:inline-block;
+    border-radius:2px;
+    float:left;
+    font-size:12px;
+    font-weight: 400;
+    margin:8px -2px -15px -2px;
+    padding:2px 9px;
+    text-transform: none;
+}
+.widget-content-expanded{
+    font-size:15px;
+}
+.widget-content-expanded span{
+    font-weight: 600;
+}
+.widget-content-expanded i{
+    color:#0088cc;
+    margin-right:5px;
+}
+
+
+/*Sidebar icon colors*/
+.side-nav li .fa-dashboard{
+    color:orange
+}
+.side-nav li .fa-edit,
+.side-nav li .fa-power-off{
+    color:red;
+}
+
+.side-nav li .fa-money{
+    color:green;
+}
+.side-nav li .fa-users,
+.side-nav li .fa-user{
+    color:#3939e2;
+}
+.side-nav li .fa-gear,
+.side-nav li .fa-book{
+    color:brown;
+}
+.side-nav li .fa-star{
+    color:yellow;
+}
+.side-nav li .fa-tag,
+.side-nav li .fa-dropbox{
+    color:#19ad70;
+}
+.side-nav li .fa-table,
+.side-nav li .fa-pencil{
+    color:#d865d8
+}

@@ -1,0 +1,19 @@
+.product-container{
+   margin-top:60px;
+}
+
+.panel-body{
+    margin-left:250px;
+    width:700px;
+}
+.form-control{
+    margin-bottom:20px;
+    padding-left:20px;
+
+}
+input[type=textarea]{
+    padding:300px 100px;
+}
+.btn-primary{
+    width:670px;
+}

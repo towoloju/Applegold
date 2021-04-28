@@ -43,7 +43,6 @@
                                 <th>Address</th>
                                 <th>Region</th>
                                 <th>Postal Code</th>
-                                <th>Password</th>
                                 <th>Verification</th>
                                 <th>Token</th>
                                 <th>Date</th>
@@ -105,7 +104,6 @@
                                 <td><?php echo $c_address; ?></td>   
                                 <td><?php echo $c_region; ?></td>
                                 <td><?php echo $c_postalcode; ?></td>
-                                <td><?php echo $c_password;?></td>
                                 <td><?php echo $c_verified; ?></td>
                                 <td><?php echo $c_token; ?></td>
                                 <td><?php echo $c_time; ?></td>

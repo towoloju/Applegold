@@ -233,6 +233,8 @@
                             </div>
                         </div>
 
+                  
+
 
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product Discount  </label>
@@ -242,6 +244,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="" class="control-label col-md-3"> Currency  </label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="currency" placeholder="NGN" required>
+
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label for="pro_label" class="control-label col-md-3"> Product Label  </label>
@@ -253,6 +262,7 @@
                                 </select>
                             </div>
                         </div>
+
 
 
                                           
@@ -335,6 +345,7 @@
       $product_oldprice = $_POST['old_price'];
       $product_newprice = $_POST['new_price'];
       $product_discount = $_POST['discount'];
+      $currency = $_POST['currency'];
       $product_label = $_POST['pro_label'];
       $product_keywords = $_POST['product_keywords'];
       $product_desc = $_POST['product_desc'];
@@ -365,8 +376,8 @@
       move_uploaded_file($ctemp_name2, "product_images/$cproduct_img2");
       move_uploaded_file($ctemp_name3, "product_images/$cproduct_img3");
 
-      $insert_product = "insert into product (p_category_id,category_id,producer_id,date,product_title,product_img1,product_img2,product_img3,cproduct_img1,cproduct_img2,cproduct_img3,old_price, new_price, discount, product_label, product_price,product_keywords,product_desc,product_model) values
-      ('$product_cat','$category',$producer_id,NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$cproduct_img1','$cproduct_img2','$cproduct_img3','$product_oldprice','$product_newprice','$product_discount', '$product_label','$product_price','$product_keywords','$product_desc','$product_model')";
+      $insert_product = "insert into product (p_category_id,category_id,producer_id,date,product_title,product_img1,product_img2,product_img3,cproduct_img1,cproduct_img2,cproduct_img3,old_price, new_price, discount, product_label, product_price, currency, product_keywords,product_desc,product_model) values
+      ('$product_cat','$category',$producer_id,NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$cproduct_img1','$cproduct_img2','$cproduct_img3','$product_oldprice','$product_newprice','$product_discount', '$product_label','$product_price','$currency','$product_keywords','$product_desc','$product_model')";
 
       $run_product = mysqli_query($con,$insert_product);
 

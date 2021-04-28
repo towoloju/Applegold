@@ -45,6 +45,8 @@
 
         $p_discount = $row_edit['discount'];
 
+        $currency = $row_edit['currency'];
+
         $p_label = $row_edit['product_label'];
 
         $p_price = $row_edit['product_price'];
@@ -331,6 +333,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="" class="control-label col-md-3"> Currency  </label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="currency" placeholder="NGN"  value="<?php echo $currency; ?>">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product Label  </label>
                             <div class="col-md-6">
                                 <select name="label" class="form-control">
@@ -424,6 +434,7 @@
       $product_oldprice = $_POST['old_price'];
       $product_newprice = $_POST['new_price'];
       $product_discount = $_POST['discount'];
+      $currency = $_POST['currency'];
       $product_label = $_POST['label'];
       $product_keywords = $_POST['product_keywords'];
       $product_desc = $_POST['product_desc'];
@@ -458,7 +469,7 @@
         move_uploaded_file($ctemp_name3, "product_images/$cproduct_img3");
 
         $update_product = "update product set p_category_id='$product_cat', category_id='$category',producer_id='$producer_id', date=NOW(), product_title='$product_title', product_img1='$product_img1', product_img2='$product_img2', product_img3='$product_img3', cproduct_img1='$cproduct_img1', cproduct_img2='$cproduct_img2',
-        cproduct_img3='$cpro_img3', old_price='$product_oldprice', new_price='$product_newprice', discount='$product_discount', product_label='$product_label', product_price='$product_price', product_keywords='$product_keywords', product_desc='$product_desc', product_model='$product_model' where product_id='$p_id'";
+        cproduct_img3='$cpro_img3', old_price='$product_oldprice', new_price='$product_newprice', discount='$product_discount', product_label='$product_label', product_price='$product_price', currency='$currency', product_keywords='$product_keywords', product_desc='$product_desc', product_model='$product_model' where product_id='$p_id'";
     
         $run_product= mysqli_query($con, $update_product);
     
@@ -476,7 +487,7 @@
           //if you dont want to upload/change product  image
 
             $update_product = "update product set p_category_id='$product_cat', category_id='$category',producer_id='$producer_id', date=NOW(), product_title='$product_title',
-             old_price='$product_oldprice', new_price='$product_newprice', discount='$product_discount', product_label='$product_label', product_price='$product_price', product_keywords='$product_keywords', product_desc='$product_desc', product_model='$product_model' where product_id='$p_id'";
+             old_price='$product_oldprice', new_price='$product_newprice', discount='$product_discount', product_label='$product_label', product_price='$product_price',currency='$currency', product_keywords='$product_keywords', product_desc='$product_desc', product_model='$product_model' where product_id='$p_id'";
         
             $run_product= mysqli_query($con, $update_product);
         

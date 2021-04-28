@@ -26,6 +26,19 @@
 
             $customer_id = $row_customer['customer_id'];
 
+            $get_product = "SELECT * FROM cart ";
+
+            $query = mysqli_query($con,$get_product);
+
+            if($query->num_rows > 0){
+
+                while ($row = mysqli_fetch_array($query)){
+                    $pro_id = $row['p_id'];
+                    $pro_name = $row['name'];
+                    $pro_model = $row['model'];
+                    $price = $row['price'];
+                    
+
         ?>
 
         <div class="options">
@@ -35,8 +48,8 @@
             </p>
 
             <p class="lead">
-                <a href="" data-toggle="modal" data-target="#exampleModalPay">
-                    Paypal Payment
+                <a href="stripe_checkout.php?pro_id=<?php echo $pro_id; ?>" >
+                    Pay Online with Stripe
                     <!-- <img class="img-responsive" src="admin_area/product_images/product-img1.jpg" alt="creditcard">  -->
                 </a>
             </p>
@@ -47,50 +60,11 @@
      
     </div>
 
-
-    <div class="col-md-6 box payment modal fade" id="exampleModalPay" tabindex="-1" role="dialog" aria-labelledby="exampleModalPayTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <i class="fa-fa-credit-card"></i>  <h5 class="modal-title" id="exampleModalPayTitle">PayPal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-
-                <div class="modal-body pay-form">
-                    <form method="post" action="" enctype="multipart/form-data">                                                                
-                        <div class="form-body">
-                            <div class="alert alert-warning alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <p><strong> Please fill in your card details</strong></p>
-                            </div> 
-                            <br>
-                            <input type="tel"class="form-control" id="card-number"  name="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
-                            <input type="text"class="form-control"  name="card-holder-name" placeholder="Firstname and Lastname" required>
-                            <div class="expiry-date">
-                                
-                                <input type="tel" class="form-control month" id="month"  maxlength="2" name="month" placeholder="MM" required>
-                                <input type="tel" class="form-control year" id="year"  maxlength="2"  name="year" placeholder="YY" required>
-                                
-                            </div>
-                            <div class="card-cvv">
-                            
-                                <input type="tel" class="form-control cvv" id="cvv" name="cvv" maxlength="3" placeholder="CVV" required>
-                                
-                            </div>
-                            <button type="submit" class="btn btn-primary" value="submit"> Proceed to PayPal</button>
-                        
-                        </div>
-                                            
-                    </form>
-                </div>
-        
-            </div>
-        </div>
-    </div>
-
+    <?php
+        }
+    }
+    ?>
+  
 
 
 

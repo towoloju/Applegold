@@ -1,12 +1,98 @@
-<html>
-  <head><title>Thanks for your order!</title></head>
-  <body>
-    <h1>Thanks for your order!</h1>
-    <p>
+<?php
+    session_start();
+?>
 
-   We appreciate your business!
-      If you have any questions, please email 
-      <a href="mailto:orders@example.com">orders@example.com</a>.
-    </p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script>
+        function paymentSuccess(){
+            Swal.fire({
+                icon: 'success',
+                timer:10000,
+                title: 'Payment Successful',
+                text: ' <strong>Kindly confirm your order to begin processing</strong>. If you have any questions do not hesitate to contact us',
+                
+            })
+        }
+        function error(){
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong',
+                
+            })
+        }
+    </script>
+</head>
+<body>
+<?php
+    include("includes/db.php");
+    include_once("functions/functions.php");
+
+    //$con = mysqli_connect('localhost','root','','ag_store');
+    //get product id, price, and currency
+
+    $ip_add = getRealIpUser();
+
+    $receipt_no = mt_rand(); //Random numbers//
+
+    $get_product = "select * from cart where ip_add='$ip_add'";
+
+    $run_product = mysqli_query($con,$get_product);
+
+    $row_cart = mysqli_fetch_array($run_product);
+
+    $pro_id=$row_cart['p_id'];
+
+    $quantity = $row_cart['quantity'];
+
+    $price = $row_cart['price'] * $quantity ;
+
+    $currency = $row_cart['currency'];
+
+    $model = $row_cart['model']; 
+    
+        //get customer email
+
+        $session = $_SESSION['email'];
+
+        $get_customer = "select * from customer where email='$session'";
+
+        $result = mysqli_query($con,$get_customer);
+
+        $row_customer = mysqli_fetch_array($result);
+
+        $c_email = $row_customer['email'];
+    
+        //set status to success
+        $status = "success";
+        $insert_payment = "insert into  online_payment (product_id, customer_email, amount, receipt, currency, model, quantity, status, date) values ('$pro_id', '$c_email', '$price', '$receipt_no', '$currency','$model', '$quantity','$status', NOW() )";
+        $run_payment = mysqli_query($con,$insert_payment);
+        if($run_payment){
+            echo "  <script>
+                        paymentSuccess();                    
+                    </script>
+            "; 
+        }else{
+            echo "<script>
+                    error();
+                </script>"; 
+        }
+
+        $delete_cart = "delete from cart where ip_add='$ip_add'";
+
+        $run_delete = mysqli_query($con,$delete_cart);
+    
+
+     
+?>
+        <a href="index.php" class="btn btn-primary">Home</a>
+</body>
 </html>

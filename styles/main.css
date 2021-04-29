@@ -1,7 +1,7 @@
                                                                    /* 
 Client Name: Apple and Gold Consulting
 Developer: Akinbode Oluwatowo
-URL: www.agstore.com | localhost/agstore
+URL: www.applegold.com | http://localhost/applegold
 Version:1.0
 */
 
@@ -1124,12 +1124,12 @@ span .label{
     float:left;
     text-decoration:line-through;
     margin-top:-10px;
-    margin-left:40px;
+    margin-left:70px;
     font-weight:bold;
 }
 .price .new{
    
-    margin-right:50px;
+    margin-right:60px;
     margin-top:-10px;
     float:right;
     color:#cf0000;
@@ -2636,7 +2636,8 @@ div.support-menu {
 }
 .price-detail .new{
    float:right;
-   margin-top:-27px;
+   margin-top:1px;
+   margin-right:350px;
    color:red;
   
 }

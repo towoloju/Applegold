@@ -301,7 +301,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product Price  </label>
                             <div class="col-md-6">
-                            <input type="text"  class="form-control" name="product_price" value="<?php echo $p_price; ?>" required>
+                            <input type="text"  class="form-control"  placeholder="Price*100"  name="product_price" value="<?php echo $p_price; ?>" required>
 
                             </div>
                         </div>
@@ -309,7 +309,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product Old Price  </label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control" name="old_price" value="<?php echo $p_oldp; ?>">
+                            <input type="text" class="form-control"  placeholder="Price*100" name="old_price" value="<?php echo $p_oldp; ?>">
 
                             </div>
                         </div>
@@ -318,7 +318,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product New Price  </label>
                             <div class="col-md-6">
-                            <input type="text"  class="form-control" name="new_price" value="<?php echo $p_newp; ?>">
+                            <input type="text"  class="form-control" placeholder="Price*100" name="new_price" value="<?php echo $p_newp; ?>">
 
                             </div>
                         </div>
@@ -335,7 +335,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Currency  </label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control" name="currency" placeholder="NGN"  value="<?php echo $currency; ?>">
+                            <input type="text" class="form-control" name="currency" placeholder="usd"  value="<?php echo $currency; ?>">
 
                             </div>
                         </div>

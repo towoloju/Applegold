@@ -70,15 +70,7 @@
 
                                     $date = $row_o['payment_date'];
 
-
-                                    $get_customer = "select * from customer";
-
-                                    $run_customer = mysqli_query($con,$get_customer);
-
-                                    $row_c=mysqli_fetch_array($run_customer);
-
-                                    $c_email = $row_c['email'];
-
+                                    $c_email = $row_o['customer_email'];
 
 
                                     $i++;
@@ -88,8 +80,10 @@
 
                             <tr>
                                 <td><?php echo $i; ?> </td>
-                                <td><?php echo $c_email; ?></td>
-                                <td><?php echo $amount; ?></td>
+                                <td><?php 
+                                  
+                                    echo $c_email; ?></td>
+                                <td>&#36; <?php echo $amount; ?></td>
                                 <td><?php echo $mode; ?></td>
                                 <td><?php echo $receipt; ?></td>
                                 <td><?php echo $voucher; ?></td>
@@ -104,7 +98,7 @@
                               
                             </tr>
 
-                            <?php } ?>
+                            <?php    } ?>
 
                            
 

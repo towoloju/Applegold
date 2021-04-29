@@ -24,7 +24,7 @@
 
         $pro_title = $row_products['product_title'];
 
-        $pro_price = $row_products['product_price'];
+        $pro_price = $row_products['product_price']/100;
 
         $pro_desc = $row_products['product_desc'];
 
@@ -38,9 +38,9 @@
 
         $pro_label = $row_products['product_label'];
 
-        $pro_oldprice = $row_products['old_price'];
+        $pro_oldprice = $row_products['old_price']/100;
 
-        $pro_newprice = $row_products['new_price'];
+        $pro_newprice = $row_products['new_price']/100;
 
         $pro_discount = $row_products['discount'];
 

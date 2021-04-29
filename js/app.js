@@ -169,7 +169,7 @@ function Verify(){
     })
 })
 
-//PREKOADER ON SHOP
+//PRELOADER ON SHOP
 $(document).ready(function(){
     $('#getLoader').on("click", function(){
         $.ajax({

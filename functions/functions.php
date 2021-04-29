@@ -47,6 +47,8 @@ function add_cart(){
 
             $pro_price = $row_price['product_price'];
 
+            $currency = $row_price['currency'];
+
             $pro_name = $row_price['product_title'];
 
             $pro_model = $row_price['product_model'];
@@ -63,7 +65,7 @@ function add_cart(){
                     $price = $pro_price;
                 }
 
-            $insert = "insert into cart (p_id,ip_add,quantity,price,model,name) values ('$p_id','$ip_add','$p_quantity','$price','$pro_model','$pro_name')";
+            $insert = "insert into cart (p_id,ip_add,quantity,price,currency,model,name) values ('$p_id','$ip_add','$p_quantity','$price','$currency','$pro_model','$pro_name')";
 
             $run_query = mysqli_query($db,$insert);
 
@@ -93,11 +95,11 @@ function getProDeal(){
             
         $pro_id = $row_products['product_id'];
         $pro_title = $row_products['product_title'];
-        $pro_price = $row_products['product_price'];
+        $pro_price = $row_products['product_price']/100;
         $pro_img1 = $row_products['product_img1'];
         $pro_img2 = $row_products['product_img2'];
-        $pro_oldprice = $row_products['old_price'];
-        $pro_newprice = $row_products['new_price'];
+        $pro_oldprice = $row_products['old_price']/100;
+        $pro_newprice = $row_products['new_price']/100;
         $pro_discount = $row_products['discount'];
 
             echo"
@@ -122,8 +124,8 @@ function getProDeal(){
                 <div class='product-content'>
                     <h3 class='title'>$pro_title</h3>
                     <div class='price'>
-                        <p class='old'>&#8358; $pro_oldprice</p>
-                        <p class='new'>&#8358; $pro_newprice</p>
+                        <p class='old'>&#36; $pro_oldprice</p>
+                        <p class='new'>&#36; $pro_newprice</p>
                     </div>
                     <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i>Add to Cart</a>
                 </div>
@@ -166,10 +168,9 @@ function getNewPro1(){
             $pro_id = $row_products['product_id'];
             $pro_title = $row_products['product_title'];
             $pro_url = $row_products['product_url'];
-            $pro_price = $row_products['product_price'];
             $pro_img1 = $row_products['product_img1'];
             $pro_img2 = $row_products['product_img2'];
-            $pro_price = $row_products['product_price'];
+            $pro_price = $row_products['product_price']/100;
             $pro_label = $row_products['product_label'];
 
         
@@ -192,7 +193,7 @@ function getNewPro1(){
                             <div class='product-boxcontent'>
                                 <h3 class='title'>$pro_title</h3>
                                 <div class='price'>
-                                    <p class='fixed'> &#8358; $pro_price</p>
+                                    <p class='fixed'> &#36; $pro_price</p>
                                     <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
                                 </div>
                             </div>
@@ -214,10 +215,9 @@ function getNewPro2(){
             $pro_id = $row_products['product_id'];
             $pro_title = $row_products['product_title'];
             $pro_url = $row_products['product_url'];
-            $pro_price = $row_products['product_price'];
+            $pro_price = $row_products['product_price']/100;
             $pro_img1 = $row_products['product_img1'];
             $pro_img2 = $row_products['product_img2'];
-            $pro_price = $row_products['product_price'];
             $pro_label = $row_products['product_label'];
                 echo"
                     <li class='span3'>
@@ -238,7 +238,7 @@ function getNewPro2(){
                             <div class='product-boxcontent'>
                                 <h3 class='title'>$pro_title</h3>
                                 <div class='price'>
-                                    <p class='fixed'> &#8358; $pro_price</p>
+                                    <p class='fixed'> &#36; $pro_price</p>
                                     <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
                                 </div>
                             </div>
@@ -259,10 +259,9 @@ function getNewPro3(){
             $pro_id = $row_products['product_id'];
             $pro_title = $row_products['product_title'];
             $pro_url = $row_products['product_url'];
-            $pro_price = $row_products['product_price'];
+            $pro_price = $row_products['product_price']/100;
             $pro_img1 = $row_products['product_img1'];
             $pro_img2 = $row_products['product_img2'];
-            $pro_price = $row_products['product_price'];
             $pro_label = $row_products['product_label'];
 
                 echo"
@@ -284,7 +283,7 @@ function getNewPro3(){
                             <div class='product-boxcontent'>
                                 <h3 class='title'>$pro_title</h3>
                                 <div class='price'>
-                                    <p class='fixed'> &#8358; $pro_price</p>
+                                    <p class='fixed'> &#36; $pro_price</p>
                                     <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
                                 </div>
                             </div>
@@ -305,7 +304,7 @@ function getProDay(){
             $pro_id = $row_products['product_id'];
             $pro_title = $row_products['product_title'];
             $pro_url = $row_products['product_url'];
-            $pro_price = $row_products['product_price'];
+            $pro_price = $row_products['product_price']/100;
             $pro_img1 = $row_products['product_img1'];
             $pro_img2 = $row_products['product_img2'];
             $pro_img3 = $row_products['product_img3'];
@@ -354,7 +353,7 @@ function getProDay(){
                     <hr>
 
                     <div class='price-detail'>
-                        <p>Price : <span class=''>&#8358; $pro_price</span></p>
+                        <p>Price : <span class=''>&#36; $pro_price</span></p>
                     </div>
 
                     <div class='stock-detail'>
@@ -410,7 +409,7 @@ function getPro(){
         $pro_id = $row_products['product_id'];
         $pro_title = $row_products['product_title'];
         $pro_url = $row_products['product_url'];
-        $pro_price = $row_products['product_price'];
+        $pro_price = $row_products['product_price']/100;
         $pro_img1 = $row_products['product_img1'];
         $pro_img2 = $row_products['product_img2'];
         $pro_label = $row_products['product_label'];
@@ -439,7 +438,7 @@ function getPro(){
                         <div class='product-content'>
                             <h3 class='title'>$pro_title</h3>
                             <div class='price'>
-                                <p class=''>  &#8358; $pro_price</p>
+                                <p class=''>  &#36; $pro_price</p>
                             
                             </div>
                             <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
@@ -473,7 +472,7 @@ function getPro(){
                         <div class='product-content'>
                             <h3 class='title'>$pro_title</h3>
                             <div class='price'>
-                                <p class=''>  &#8358; $pro_price</p>
+                                <p class=''>  &#36; $pro_price</p>
                             
                             </div>
                             <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
@@ -505,7 +504,7 @@ function getPro(){
                     <div class='product-content'>
                         <h3 class='title'>$pro_title</h3>
                         <div class='price'>
-                            <p class=''>  &#8358; $pro_price</p>
+                            <p class=''>  &#36; $pro_price</p>
                         
                         </div>
                         <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
@@ -615,7 +614,7 @@ function getCats(){
             $pro_id = $row_products['product_id'];
             $pro_title = $row_products['product_title'];
             $pro_url = $row_products['product_url'];
-            $pro_price = $row_products['product_price'];
+            $pro_price = $row_products['product_price']/100;
             $pro_img1 = $row_products['product_img1'];
             $pro_img2 = $row_products['product_img2'];
 
@@ -641,7 +640,7 @@ function getCats(){
                     <div class='product-content'>
                         <h3 class='title text-center'>$pro_title</h3>
                         <div class='price'>
-                            <p class='text-center'>  &#8358; $pro_price</p>
+                            <p class='text-center'>  &#36; $pro_price</p>
                         
                         </div>
                         <a href='details.php?pro_id=$pro_id' class='btn btn-info buy' style='width:120px;'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
@@ -701,7 +700,7 @@ function getCatItems(){
            $pro_id = $row_products['product_id'];
            $pro_title = $row_products['product_title'];
            $pro_url = $row_products['product_url'];
-           $pro_price = $row_products['product_price'];
+           $pro_price = $row_products['product_price']/100;
            $pro_desc = $row_products['product_desc'];
            $pro_img1 = $row_products['product_img1'];
            $pro_img2 = $row_products['product_img2'];
@@ -729,7 +728,7 @@ function getCatItems(){
                     <div class='product-content'>
                         <h3 class='title text-center'>$pro_title</h3>
                         <div class='price'>
-                            <p class='text-center'>  &#8358; $pro_price</p>
+                            <p class='text-center'>  &#36; $pro_price</p>
                         
                         </div>
                         <a href='details.php?pro_id=$pro_id' class='btn btn-info buy' style='width:120px;'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
@@ -784,7 +783,7 @@ function total_price(){
         
     }
 
-    echo    "&#8358;  .$total";
+    echo    "&#36;  .$total";
 }
 
 //FUNCTION ABOUT STORE
@@ -876,13 +875,13 @@ function getProducts(){
         $pro_id = $row_p['product_id'];
         $pro_title = $row_p['product_title'];
         $pro_url = $row_p['product_url'];
-        $pro_price = $row_p['product_price'];
+        $pro_price = $row_p['product_price']/100;
         $pro_img1 = $row_p['product_img1'];
         $pro_img2 = $row_p['product_img2'];
         $pro_label = $row_p['product_label'];
         $pro_discount = $row_p['discount'];
-        $pro_oldprice = $row_p['old_price'];
-        $pro_newprice = $row_p['new_price'];
+        $pro_oldprice = $row_p['old_price']/100;
+        $pro_newprice = $row_p['new_price']/100;
 
         if($pro_label=='sale'){
 
@@ -908,7 +907,7 @@ function getProducts(){
                     <div class='product-content'>
                         <h3 class='title'>$pro_title</h3>
                         <div class='price'>
-                        <p class='text-center'>  &#8358; $pro_price</p>
+                        <p class='text-center'>  &#36; $pro_price</p>
                         </div>
                         <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i>Add to Cart</a>
                     </div>
@@ -939,7 +938,7 @@ function getProducts(){
                 <div class='product-content'>
                     <h3 class='title'>$pro_title</h3>
                     <div class='price'>
-                    <p class='text-center'>  &#8358; $pro_price</p>
+                    <p class='text-center'>  &#36; $pro_price</p>
                     </div>
                     <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i>Add to Cart</a>
                 </div>
@@ -969,8 +968,8 @@ function getProducts(){
                     <div class='product-content'>
                         <h3 class='title'>$pro_title</h3>
                         <div class='price'>
-                        <p class='old'>&#8358; $pro_oldprice</p>
-                        <p class='new'>&#8358; $pro_newprice</p>
+                        <p class='old'>&#36; $pro_oldprice</p>
+                        <p class='new'>&#36; $pro_newprice</p>
                         </div>
                         <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i>Add to Cart</a>
                     </div>
@@ -999,7 +998,7 @@ function getProducts(){
                 <div class='product-content'>
                     <h3 class='title'>$pro_title</h3>
                     <div class='price'>
-                    <p class='text-center'>  &#8358; $pro_price</p>
+                    <p class='text-center'>  &#36; $pro_price</p>
                     </div>
                     <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i>Add to Cart</a>
                 </div>

@@ -210,7 +210,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product Price  </label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control" name="product_price" required>
+                            <input type="text" class="form-control"  placeholder="Price*100" name="product_price" required>
 
                             </div>
                         </div>
@@ -219,7 +219,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product Old Price  </label>
                             <div class="col-md-6">
-                            <input type="text"  class="form-control" name="old_price">
+                            <input type="text"  class="form-control"  placeholder="Price*100" name="old_price">
 
                             </div>
                         </div>
@@ -228,7 +228,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Product New Price  </label>
                             <div class="col-md-6">
-                            <input type="text"  class="form-control" name="new_price">
+                            <input type="text"  class="form-control" placeholder="Price*100" name="new_price">
 
                             </div>
                         </div>
@@ -247,7 +247,7 @@
                         <div class="form-group">
                             <label for="" class="control-label col-md-3"> Currency  </label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control" name="currency" placeholder="NGN" required>
+                            <input type="text" class="form-control" name="currency" placeholder="usd" required>
 
                             </div>
                         </div>

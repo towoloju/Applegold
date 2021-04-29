@@ -15,7 +15,8 @@
 
         $row_p = mysqli_fetch_array($query);
         $product_name = $row_p['name'];
-        $product_price = $row_p['price'];
+        $quantity = $row_p['quantity'];
+        $product_price = $row_p['price'] * $quantity;
         $currency = $row_p['currency'];
     }else{
         header("location:index.php");

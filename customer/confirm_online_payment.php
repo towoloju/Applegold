@@ -1,9 +1,40 @@
 <?php
+    $active="Account";
     session_start();
-    
 
-    include("includes/db.php");
-    include("functions/functions.php");
+    if(!isset($_SESSION['email'])){
+        echo "<script>window.open('../checkout.php','_self')</script>";
+    }else{
+        include("includes/db.php");
+        include_once("functions/functions.php");
+
+    if(isset($_GET['order_id'])){
+        $order_id = $_GET['order_id'];
+    }
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AG STORE</title>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/grid.css">
+
+    
+ 
+</head>
+<body>
+
+
+ 
+<?php
+    
     require('PHPMailer/PHPMailerAutoload.php');
     require('credentials.php');
 
@@ -24,7 +55,7 @@
 
         $pro_title = $row_products['product_title'];
 
-        $pro_price = $row_products['product_price']/100;
+        $pro_price = $row_products['product_price'];
 
         $pro_desc = $row_products['product_desc'];
 
@@ -38,9 +69,9 @@
 
         $pro_label = $row_products['product_label'];
 
-        $pro_oldprice = $row_products['old_price']/100;
+        $pro_oldprice = $row_products['old_price'];
 
-        $pro_newprice = $row_products['new_price']/100;
+        $pro_newprice = $row_products['new_price'];
 
         $pro_discount = $row_products['discount'];
 
@@ -103,7 +134,7 @@
                     <div class="input-group">
                         <input type="text" class="control" aria-label="..." placeholder="Search">
                         <div class="input-group-btn">
-                            <button class="btn btn-info btn-top" type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-info btn-top"  type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </form>
@@ -447,3 +478,257 @@
 
     
   
+
+
+
+
+
+
+
+
+
+
+
+    <div id="content"> <!----content begins-->
+
+        <div class="container"> <!----container begins-->
+
+            <div class="col-md-12"> <!----col-md-12 begins-->
+            
+                <ul class="breadcrumb"> <!----breadcrumb begins-->
+
+                    <li><a href="index.php">Home</a></li>
+                    <li>My Account</li>
+                    
+                </ul> <!----breadcrumb ends-->
+            
+            </div> <!----col-md-12 ends-->
+
+            <div class="col-md-3"> <!----col-md-3 begins-->           
+                <?php
+                    include("includes/customer_sidebar.php");
+                ?>
+            </div> <!----col-md-3 ends-->
+            
+
+            <?php
+
+          
+
+               $order_id = $_GET['order_id'];
+               $get_values = "select * from online_payment where order_id='$order_id'";
+
+                $run_values  =  mysqli_query($con,$get_values);
+
+                $row_values = mysqli_fetch_array($run_values);
+
+                $receipt = $row_values['receipt'];
+
+                $price = $row_values['amount']/100;
+                            
+                    
+            
+            ?>
+            <div class="col-md-9">
+                <div class="box">
+                    <h1 align="center" class="confirm-text">Please Confirm Payment</h1>
+
+                    <form action="confirm.php?update_id=<?php echo $order_id; ?>" method="post" enctype="multipart/form-data">
+                            <div class="main-container">
+                                <div class="form-confirm">
+                                    <input type ="text" class="control"  name ='receipt' placeholder= "Receipt No" value="<?php echo $receipt; ?>" required>
+                                    <input type ="text" class="control" name='price' placeholder="Amount" value="<?php echo $price; ?>"  required>
+                                    <select name="payment_mode" class="control">
+                                        <option disabled>Pay On Delivery</option>
+                                        <option selected>Pay Online</option>
+                                        <option disabled>Voucher Code</option>
+                                    </select>
+                                    <input type ="text" class="control" name="voucher_code" placeholder="Voucher Code">
+
+                                    <input type ="text" class="control" name="payment_date" placeholder="Payment Date(yyyy-mm-dd)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"  required>
+
+                                    <div class="text-center">
+                                        <button class="btn btn-primary btn-lg btn-confirm" name="confirm_payment" >
+                                            <i class="fa fa-user-md"></i> Confirm Payment
+                                        </button>
+                                    </div>                                 
+                                    
+                                </div>
+                            </div>
+
+                    </form>
+                   
+                 
+                    <script src="js/jquery-3.4.1.min.js"></script>
+                    <script src="js/bootstrap.min.js"></script>
+                    <script src="js/sweetalert2.all.min.js"></script>
+                    <script >
+                        function confirmSuccess(){
+                            Swal.fire({
+                                title: 'Successful',
+                                text: 'Thank you for purchasing, your order will be completed within 24 hours',
+                                icon: 'success'
+                            }).then(function(){
+                                window.location = 'my_account.php?my_orders'
+                            });
+                    
+                        }
+
+                        function error(){
+                            Swal.fire({
+                                title: 'Oops ...',
+                                text: 'Something went wrong',
+                                icon: 'error'
+                            })
+                        }
+
+                        function couponExpired(){
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: 'Your coupon already expired',
+                            icon: 'info'
+                        });
+                
+                        }
+
+
+                        function errorVoucher(){
+                            Swal.fire({
+                                title: 'Oops ...',
+                                text: 'Invalid voucher code',
+                                icon: 'info'
+                            })
+                        }
+
+
+                        function couponEligible(){
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: 'Your coupon cannot be applied to this product',
+                            icon: 'info'
+                        });
+                
+                    }
+                    
+                    </script>
+
+
+                    <?php
+                    
+                    if(isset($_POST['confirm_payment'])){
+
+                        $update_id = $_GET['update_id'];
+                        $pro_receipt = $_POST['receipt'];
+                        $pro_amount = $_POST['price'];
+                        $payment_mode = $_POST['payment_mode'];
+                        $code = $_POST['voucher_code'];
+                        $payment_date = $_POST['payment_date'];
+                        $complete = "complete";
+
+                      
+                            
+                            $insert_payment = "insert into payment (receipt_no,amount,payment_mode,voucher_code,payment_date)
+                            values ('$pro_receipt','$pro_amount','$payment_mode','$code','$payment_date')";
+
+                            $run_payment = mysqli_query($con,$insert_payment);
+
+                            $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";
+                            $run_customer_order = mysqli_query($con,$update_customer_order);
+                            $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
+                            $run_pending_order = mysqli_query($con,$update_pending_order);
+
+                            if($run_pending_order){
+                                echo "<script> confirmSuccess(); </script>";
+                            
+
+                            }else{
+                                echo "<script> error(); </script>";
+                            }
+
+
+
+
+                        // }else{
+
+                        //     $get_coupon = "select * from coupons where coupon_code='$code'";
+                        //     $run_coupon = mysqli_query($con,$get_coupon);
+                        //     $row_coupon= mysqli_fetch_array($run_coupon);
+                    
+                        //     $coupon_code = $row_coupon['coupon_code'];
+                        //     $coupon_pro_id = $row_coupon['product_id'];
+                        //     $coupon_limit= $row_coupon['coupon_limit'];
+                        //     $coupon_used = $row_coupon['coupon_used'];
+
+                        //     if($coupon_limit == $coupon_used){
+                        //         echo "<script> couponExpired(); </script>";
+                        
+                        //     }
+                                
+                        //     $get_pro = "select * from product";
+
+                        //     $run_pro = mysqli_query($con,$get_pro);
+                            
+                        //     while($row_pro = mysqli_fetch_array($run_pro)){
+    
+                        //         $product_id = $row_pro['product_id'];
+
+                        //             if($coupon_pro_id == $product_id){
+
+                        //                 $insert_payment = "insert into payment (receipt_no,amount,payment_mode,voucher_code,payment_date)
+                        //                 values ('$pro_receipt','$pro_amount','$payment_mode','$code','$payment_date')";
+                
+                        //                 $run_payment = mysqli_query($con,$insert_payment);
+                
+                        //                 $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";
+                        //                 $run_customer_order = mysqli_query($con,$update_customer_order);
+                        //                 $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
+                        //                 $run_pending_order = mysqli_query($con,$update_pending_order);
+                
+                        //                     if($run_pending_order){
+                        //                         echo "<script> confirmSuccess(); </script>";
+                        //                     }else{
+                        //                         echo "<script> error(); </script>";
+                        //                     }
+
+
+                        //             }elseif($coupon_pro_id != $product_id){
+                        //                 echo "<script> couponEligible(); </script>";
+
+                        //             }else{
+                        //                 echo "<script> errorVoucher(); </script>";
+                        //             }
+                        //     }
+                        
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                    } ?>
+
+
+
+                </div>
+
+            </div>
+        
+        </div>
+    </div>
+
+
+        <?php
+        include("includes/footer.php");
+        ?>
+
+
+
+
+
+</body>
+</html>
+
+<?php
+    }
+?>

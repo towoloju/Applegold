@@ -24,7 +24,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="fa fa-book"></i>  Orders
+                    <i class="fa fa-book"></i>  Orders Payment on Delivery
                 </h3>
             </div>
 
@@ -105,7 +105,7 @@
 
                                     $date = $row_d['order_date'];
 
-                                    $amount = $row_d['amount'];
+                                    $amount = $row_d['amount']/100;
 
 
 
@@ -121,7 +121,7 @@
                                 <td><?php echo $p_title; ?></td>
                                 <td><?php echo $quantity; ?></td>
                                 <td><?php echo $model; ?></td>
-                                <td><?php echo $amount; ?></td>
+                                <td>&#36; <?php echo $amount; ?></td>
                                 <td><?php echo $receipt; ?></td>
                                 <td>
                                     <?php 
@@ -129,6 +129,124 @@
                                             echo $status='Pending';
                                         }else{
                                             echo $status='Complete';
+                                        }
+                                     ?>
+                                </td>   
+                                <td><?php echo $date; ?></td>
+                                
+
+                                <td>
+                                    <a href="index.php?delete_order=<?php echo $order_id; ?>">
+                                        <i class="fa fa-trash"></i>  Delete
+                                    </a>
+                                </td>
+                              
+                            </tr>
+
+                            <?php } ?>
+
+                           
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-book"></i>  Orders - Online Payment
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class= "table table-striped table-bordered table-hover">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer Email</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Model</th>
+                                <th>Amount</th>
+                                <th>Receipt NO</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Delete</th>
+                                
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            <?php
+                                $i=0;
+
+                                $get_order ="select * from online_payment";
+
+                                $run_order = mysqli_query($con, $get_order);
+
+                                while($row_order=mysqli_fetch_array($run_order)){
+
+                                    $order_id = $row_order['order_id'];
+
+                                    $c_email= $row_order['customer_email'];
+
+                                    $receipt = $row_order['receipt'];
+
+                                    $quantity = $row_order['quantity'];
+
+                                    $model = $row_order['model'];
+
+                                    $product_id = $row_order['product_id'];
+
+                                    $status = $row_order['status'];
+
+                                    $date = $row_order['date'];
+
+                                    $amount = $row_order['amount']/100;
+
+
+
+
+                                    $get_product ="select * from product where product_id='$product_id'";
+
+                                    $run_product = mysqli_query($con,$get_product);
+
+                                    $row_p = mysqli_fetch_array($run_product);
+
+                                    $p_title = $row_p['product_title'];
+
+
+
+                                    $i++;
+
+                                
+                            ?>
+
+                            <tr>
+                                <td><?php echo $i; ?> </td>
+                                <td><?php echo $c_email; ?></td>
+                                <td><?php echo $p_title; ?></td>
+                                <td><?php echo $quantity; ?></td>
+                                <td><?php echo $model; ?></td>
+                                <td>&#36; <?php echo $amount; ?></td>
+                                <td><?php echo $receipt; ?></td>
+                                <td>
+                                    <?php 
+                                        if($status=='success'){
+                                            echo $status='Payment Successful';
+                                        }else{
+                                            echo $status = 'Failed Payment';
                                         }
                                      ?>
                                 </td>   

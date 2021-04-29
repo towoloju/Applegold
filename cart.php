@@ -71,7 +71,7 @@
 
                                            $pro_quantity = $row_cart['quantity'];
 
-                                           $pro_price = $row_cart['price'];
+                                           $pro_price = $row_cart['price']/100;
 
                                            $get_product = "select * from product where product_id='$pro_id'";
 
@@ -121,7 +121,7 @@
 
                                         <td>
 
-                                             &#8358;   <?php echo $pro_price; ?> 
+                                            &#36;   <?php echo $pro_price; ?> 
 
                                         </td>
 
@@ -151,7 +151,7 @@
 
                                         <td>
 
-                                            &#8358;  <?php echo $sub_total; ?>
+                                           &#36;  <?php echo $sub_total; ?>
 
                                         </td>
 
@@ -182,7 +182,7 @@
                                 
                                     <tr>
                                         <th colspan="4">Total</th>
-                                        <th colspan="3" class="totalp"> &#8358; <?php echo $total; ?></th>
+                                        <th colspan="3" class="totalp">&#36; <?php echo $total; ?></th>
                                     </tr>
                                 </tfoot>
                         
@@ -368,7 +368,7 @@
                     $pro_id = $row_products['product_id'];
                     $pro_title = $row_products['product_title'];
                     $pro_url = $row_products['product_url'];
-                    $pro_price = $row_products['product_price'];
+                    $pro_price = $row_products['product_price']/100;
                     $pro_img1 = $row_products['product_img1'];
                     $pro_img2 = $row_products['product_img2'];
         
@@ -395,7 +395,7 @@
                             <div class='product-content'>
                                 <h3 class='title'>$pro_title</h3>
                                 <div class='price'>
-                                    <p class=''>  &#8358; $pro_price</p>
+                                    <p class=''> &#36; $pro_price</p>
                                 
                                 </div>
                                 <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>
@@ -429,20 +429,20 @@
                             <tbody> <!----tbody begins-->
                                 <tr>
                                     <td>Order All Sub-Total</td>
-                                    <th>&#8358;  <?php echo $total;?></th>
+                                    <th> &#36;  <?php echo $total;?></th>
                                 </tr>
 
                                 <tr>
                                     <td>Shipping and Handling</td>
-                                    <th> &#8358;  0</th>
+                                    <th>&#36;  0</th>
                                 </tr>
                                 <tr>
                                     <td>Tax</td>
-                                    <th> &#8358;  0</th>
+                                    <th>&#36;  0</th>
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th>&#8358; <?php echo $total;?></th>
+                                    <th> &#36; <?php echo $total;?></th>
                                 </tr>
                             </tbody> <!----tbody ends-->
 

@@ -105,13 +105,13 @@
                                 if($pro_discount!='0'){
                                     echo"  
                                             <p> 
-                                            Price: <span class='old'>&#8358; $pro_oldprice </span>
-                                                    <span class='new'>&#8358; $pro_newprice </span>
+                                            Price: <span class='old'>&#36; $pro_oldprice </span>
+                                                    <span class='new'>&#36; $pro_newprice </span>
                                             </p>
 
                                         ";
                                 }else{
-                                    echo "<p>Price : <span class='pull-right' >&#8358;$pro_price</span></p>";
+                                    echo "<p>Price : <span class='pull-right' >&#36;$pro_price</span></p>";
                                 }
                                
                             ?>
@@ -172,7 +172,7 @@
                         while($row_products=mysqli_fetch_array($run_product)){
                             $pro_id = $row_products['product_id'];
                             $pro_title = $row_products['product_title'];
-                            $pro_price = $row_products['product_price'];
+                            $pro_price = $row_products['product_price']/100;
                             $pro_img1 = $row_products['product_img1'];
                             $pro_img2 = $row_products['product_img2'];
                             $pro_label = $row_products['product_label'];
@@ -204,7 +204,7 @@
                                     <div class='product-content'>
                                         <h3 class='title'>$pro_title</h3>
                                         <div class='price'>
-                                            <p class=''>  &#8358; $pro_price</p>
+                                            <p class=''>  &#36; $pro_price</p>
                                         
                                         </div>
                                         <a href='details.php?pro_id=$pro_id' class='btn btn-info buy'><i class='fa fa-shopping-cart'></i> Add to Cart</a>

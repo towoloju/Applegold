@@ -436,10 +436,10 @@
                     <ul class="nav navbar-nav left"> <!---nav nav-navbar left begins---->
 
                         <li class="<?php if($active=='Home') echo"active"; ?>">
-                            <a href="index.php">Home</a>
+                            <a href="../index.php">Home</a>
                         </li>
                         <li class="<?php if($active=='Shop') echo"active"; ?>">
-                            <a href="shop.php"> Shop</a>
+                            <a href="../shop.php"> Shop</a>
                         </li>
                         <li class="<?php if($active=='Account') echo"active"; ?>">
                             <?php
@@ -453,10 +453,10 @@
                             ?>
                         </li>
                         <li class="<?php if($active=='Cart') echo"active"; ?>">
-                            <a href="cart.php"> Shopping Cart</a>
+                            <a href="../cart.php"> Shopping Cart</a>
                         </li>
                         <li class="<?php if($active=='Contact') echo"active"; ?>">
-                            <a href="contact.php"> Contact Us</a>
+                            <a href="../contact.php"> Contact Us</a>
                         </li>
 
 
@@ -543,7 +543,7 @@
 
                 $receipt = $row_values['receipt_no'];
 
-                $price = $row_values['amount'];
+                $price = $row_values['amount']/100;
                             
                     
             
@@ -559,7 +559,7 @@
                                     <input type ="text" class="control" name='price' placeholder="Amount" value="<?php echo $price; ?>"  required>
                                     <select name="payment_mode" class="control">
                                         <option>Pay On Delivery</option>
-                                        <option>Pay Online</option>
+                                        <option disabled>Pay Online</option>
                                         <option>Voucher Code</option>
                                     </select>
                                     <input type ="text" class="control" name="voucher_code" placeholder="Voucher Code">
@@ -643,11 +643,12 @@
                         $code = $_POST['voucher_code'];
                         $payment_date = $_POST['payment_date'];
                         $complete = "complete";
+                        $c_email = $_SESSION['email'];
 
                       
                             
-                            $insert_payment = "insert into payment (receipt_no,amount,payment_mode,voucher_code,payment_date)
-                            values ('$pro_receipt','$pro_amount','$payment_mode','$code','$payment_date')";
+                            $insert_payment = "insert into payment (customer_email,receipt_no,amount,payment_mode,voucher_code,payment_date)
+                            values ('$c_email','$pro_receipt','$pro_amount','$payment_mode','$code','$payment_date')";
 
                             $run_payment = mysqli_query($con,$insert_payment);
 

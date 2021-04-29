@@ -49,8 +49,7 @@
 
             <p class="lead">
                 <a href="stripe_checkout.php?pro_id=<?php echo $pro_id; ?>" >
-                    Pay Online with Stripe
-                    <!-- <img class="img-responsive" src="admin_area/product_images/product-img1.jpg" alt="creditcard">  -->
+                    Pay Online with Stripe 
                 </a>
             </p>
 

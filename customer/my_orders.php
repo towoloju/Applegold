@@ -86,7 +86,7 @@
                                 <td><?php echo $order_date; ?></td>
                                 <td><?php echo $order_status; ?></td>
                                 <td>
-                                    <a href="confirm.php?order_id=<?php echo  $order_id; ?>" target="_blank" class="btn btn-primary btn-sm">Confirm Paid</a>
+                                    <a href="confirm.php?order_id=<?php echo $order_id; ?>" target="_blank" class="btn btn-primary btn-sm">Confirm Paid</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -142,7 +142,7 @@
 
                             while($row_orders = mysqli_fetch_array($run_orders)){
                                 $i++;
-                                $order_id = $row_orders['order_id'];
+                                $order_no = $row_orders['order_id'];
                                 $amount = $row_orders['amount']/100;
                                 $receipt = $row_orders['receipt'];
                                 $quantity = $row_orders['quantity'];
@@ -172,11 +172,11 @@
                                     <?php
                                         if($order_status =='Payment Successful'){
                                             echo"
-                                            <a href='confirm_online_payment.php?order_id=<?php echo $order_id; ?>' target='_blank' class='btn btn-primary btn-sm'> Confirm</a> 
+                                            <a href='confirm_online_payment.php?order_id=$order_no' target='_blank' class='btn btn-primary btn-sm'> Confirm</a> 
                                             ";
                                         }else if($order_status=='Payment Failed'){
                                             echo"
-                                            <a href='confirm_online_payment.php?order_id=<?php echo $order_id; ?>' target='_blank' class='btn btn-primary btn-sm disabled '> Confirm</a> 
+                                            <a href='confirm_online_payment.php?order_id=$order_no' target='_blank' class='btn btn-primary btn-sm disabled '> Confirm</a> 
                                             ";
                                         }
                                     ?>

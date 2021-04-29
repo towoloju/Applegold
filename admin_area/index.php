@@ -66,6 +66,15 @@
 
         $count_pending_orders = mysqli_num_rows($run_pending_orders);
 
+
+        $get_online_orders = "select * from online_payment";
+
+        $run_online_orders = mysqli_query($con,$get_online_orders);
+
+        $count_online_orders = mysqli_num_rows($run_online_orders);
+
+        $count_orders = ($count_online_orders + $count_pending_orders);
+
    
 
 ?>

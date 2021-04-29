@@ -157,7 +157,7 @@
                     </div>
 
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?php echo $count_pending_orders; ?></div>
+                        <div class="huge"><?php echo $count_orders; ?></div>
                         <div> Orders</div>
                     </div>
 
@@ -192,7 +192,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <i class="fa fa-money fa-fw"></i>  New Orders
+                    <i class="fa fa-money fa-fw"></i>  New Orders- Pay on  Delivery
                 </h3>
             </div>
 
@@ -202,13 +202,13 @@
 
                         <thead>
                             <tr>
-                                <th> Order NO </th>
+                                <th> Order  </th>
                                 <th> Customer Email</th>
-                                <th> Receipt NO</th>
-                                <th> Product ID</th>
-                                <th> Product Quantity</th>
-                                <th> Product Model</th>
-                                <th> Order Status</th>
+                                <th> Receipt </th>
+                                <th> Product</th>
+                                <th> Quantity</th>
+                                <th> Model</th>
+                                <th> Status</th>
                             </tr>
                         </thead>
 
@@ -216,7 +216,7 @@
                         <?php 
                             $i=0;
 
-                            $get_orders = "select * from pending_orders order by 1 DESC LIMIT 0,4";
+                            $get_orders = "select * from pending_orders order by 1 DESC LIMIT 0,3";
 
                             $run_orders = mysqli_query($con, $get_orders);
 
@@ -256,7 +256,19 @@
                                     ?>
                                 </td>
                                 <td><?php echo $receipt_no;?></td>
-                                <td><?php echo $product_id ;?></td>
+                                <td>   
+                                    <?php 
+                                        $get_product = "select * from product where product_id='$product_id'";
+
+                                        $run_product = mysqli_query($con, $get_product);
+
+                                        $row_product = mysqli_fetch_array($run_product);
+
+                                        $product_title = $row_product['product_title'];
+
+                                        echo $product_title;
+                                    ?>
+                                </td>
                                 <td><?php echo $quantity;?></td>
                                 <td><?php echo $model;?></td>
                                 <td>
@@ -265,6 +277,108 @@
                                             echo $order_status ='Pending';
                                         }else{
                                             echo $order_status='Complete';
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+
+
+                        <?php
+                            }
+                        ?>
+                            
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+                <div class="text-right">
+                    <a href="index.php?view_orders">
+                        View All Orders  <i class="fa fa-arrow-circle-right"></i>
+
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-money fa-fw"></i>  New Orders- Online Payment
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-stripped table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th> Order  </th>
+                                <th> Customer Email</th>
+                                <th> Receipt </th>
+                                <th> Product</th>
+                                <th> Quantity</th>
+                                <th> Model</th>
+                                <th> Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php 
+                            $i=0;
+
+                            $get_online_orders = "select * from online_payment order by 1 DESC LIMIT 0,3";
+
+                            $run_online_orders = mysqli_query($con, $get_online_orders);
+
+                            while($row_online_orders = mysqli_fetch_array($run_online_orders)){
+
+                                $order_id = $row_online_orders['order_id'];
+
+                                $c_email = $row_online_orders['customer_email'];
+
+                                $receipt_no = $row_online_orders['receipt'];
+
+                                $product_id = $row_online_orders['product_id'];
+
+                                $quantity = $row_online_orders['quantity'];
+
+                                $model = $row_online_orders['model'];
+
+                                $order_status= $row_online_orders['status'];
+
+                                $i++;
+
+
+                        ?>
+                            <tr>
+                                <td><?php echo $order_id ;?></td>
+                                <td><?php echo $c_email;?></td>
+                                <td><?php echo $receipt_no;?></td>
+                                <td>   
+                                    <?php 
+                                        $get_product = "select * from product where product_id='$product_id'";
+
+                                        $run_product = mysqli_query($con, $get_product);
+
+                                        $row_product = mysqli_fetch_array($run_product);
+
+                                        $product_title = $row_product['product_title'];
+
+                                        echo $product_title;
+                                    ?>
+                                </td>
+                                <td><?php echo $quantity;?></td>
+                                <td><?php echo $model;?></td>
+                                <td>
+                                    <?php 
+                                        if($order_status==='success'){
+                                            echo $order_status ='Payment Successful';
+                                        }else{
+                                            echo $order_status='Payment Failed';
                                         }
                                     ?>
                                 </td>
@@ -330,6 +444,8 @@
     
 
 </div>
+
+
 
 <?php 
     } 

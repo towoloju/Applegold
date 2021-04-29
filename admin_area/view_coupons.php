@@ -63,7 +63,7 @@
 
                                     $coupon_title = $row_c['coupon_title'];
 
-                                    $coupon_price = $row_c['coupon_price'];
+                                    $coupon_price = $row_c['coupon_price']/100;
 
                                     $coupon_code = $row_c['coupon_code'];
 
@@ -90,7 +90,7 @@
                                 <td><?php echo $i ;?></td>
                                 <td><?php echo $coupon_title ;?></td>
                                 <td><?php echo $product_title ;?></td>
-                                <td> &#8358; <?php echo $coupon_price ;?></td>
+                                <td> &#36; <?php echo $coupon_price ;?></td>
                                 <td><?php echo $coupon_code ;?></td>
                                 <td><?php echo $coupon_limit ;?></td>
                                 <td><?php echo $coupon_used ;?></td>

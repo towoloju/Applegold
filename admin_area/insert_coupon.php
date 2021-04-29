@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Coupon Price</label>
                             <div class="col-md-6">  
-                                <input type="text" class="form-control" name="coupon_price" required>
+                                <input type="text" class="form-control" placeholder="Price*100" name="coupon_price" required>
 
                             </div>
                         </div>  

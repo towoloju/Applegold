@@ -1,6 +1,7 @@
 <?php
     $active="Account";
     session_start();
+   
 
     if(!isset($_SESSION['email'])){
         echo "<script>window.open('../checkout.php','_self')</script>";
@@ -513,29 +514,11 @@
 
             <?php
 
-            //    $customer_session = $_SESSION['email'];
-
-            //    $get_customer = "select * from customer where email='$customer_session'";
+       
+              
+                $order_no = $_GET['order_id'];
    
-            //    $run_customer = mysqli_query($con,$get_customer);
-     
-            //    $row_customer = mysqli_fetch_array($run_customer);
-
-            
-   
-            //    $customer_id = $row_customer['customer_id'];
-
-
-            //     $get_orders = "select * from customer_orders where customer_id='$customer_id'";
-               
-            //     $run_orders = mysqli_query($con,$get_orders);
-             
-            //     $row_orders = mysqli_fetch_array($run_orders);
-
-            //      $order_id = $row_orders['order_id'];
-
-   
-               $get_values = "select * from customer_orders where order_id='$order_id'";
+                $get_values = "select * from customer_orders where order_id='$order_no'";
 
                 $run_values  =  mysqli_query($con,$get_values);
 
@@ -552,7 +535,7 @@
                 <div class="box">
                     <h1 align="center" class="confirm-text">Please Confirm Payment</h1>
 
-                    <form action="confirm.php?update_id=<?php echo $order_id; ?>" method="post" enctype="multipart/form-data">
+                    <form action="confirm.php?update_id=<?php echo $order_no; ?>" method="post" enctype="multipart/form-data">
                             <div class="main-container">
                                 <div class="form-confirm">
                                     <input type ="text" class="control"  name ='receipt' placeholder= "Receipt No" value="<?php echo $receipt; ?>" required>
@@ -647,85 +630,94 @@
 
                       
                             
-                            $insert_payment = "insert into payment (customer_email,receipt_no,amount,payment_mode,voucher_code,payment_date)
-                            values ('$c_email','$pro_receipt','$pro_amount','$payment_mode','$code','$payment_date')";
+                        $insert_payment = "insert into payment (customer_email,receipt_no,amount,payment_mode,voucher_code,payment_date)
+                        values ('$c_email','$pro_receipt','$pro_amount','$payment_mode','$code','$payment_date')";
 
-                            $run_payment = mysqli_query($con,$insert_payment);
-
-                            $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";
-                            $run_customer_order = mysqli_query($con,$update_customer_order);
-                            $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
-                            $run_pending_order = mysqli_query($con,$update_pending_order);
-
-                            if($run_pending_order){
-                                echo "<script> confirmSuccess(); </script>";
-                            
-
-                            }else{
-                                echo "<script> error(); </script>";
-                            }
+                        $run_payment = mysqli_query($con,$insert_payment);
 
 
+                        $output = '<div>
+                                        <h1>We appreciate your patronage</h1>
+                                        <p>Dear'    .$c_email. '</p>
+                                        <p>Your order had been confirmed and would be processed in 24 hours.</p>
+                                          
+                                     </div>'  ; 
 
-
-                        // }else{
-
-                        //     $get_coupon = "select * from coupons where coupon_code='$code'";
-                        //     $run_coupon = mysqli_query($con,$get_coupon);
-                        //     $row_coupon= mysqli_fetch_array($run_coupon);
-                    
-                        //     $coupon_code = $row_coupon['coupon_code'];
-                        //     $coupon_pro_id = $row_coupon['product_id'];
-                        //     $coupon_limit= $row_coupon['coupon_limit'];
-                        //     $coupon_used = $row_coupon['coupon_used'];
-
-                        //     if($coupon_limit == $coupon_used){
-                        //         echo "<script> couponExpired(); </script>";
-                        
-                        //     }
+                        if($run_payment==true){
                                 
-                        //     $get_pro = "select * from product";
-
-                        //     $run_pro = mysqli_query($con,$get_pro);
-                            
-                        //     while($row_pro = mysqli_fetch_array($run_pro)){
-    
-                        //         $product_id = $row_pro['product_id'];
-
-                        //             if($coupon_pro_id == $product_id){
-
-                        //                 $insert_payment = "insert into payment (receipt_no,amount,payment_mode,voucher_code,payment_date)
-                        //                 values ('$pro_receipt','$pro_amount','$payment_mode','$code','$payment_date')";
-                
-                        //                 $run_payment = mysqli_query($con,$insert_payment);
-                
-                        //                 $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";
-                        //                 $run_customer_order = mysqli_query($con,$update_customer_order);
-                        //                 $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
-                        //                 $run_pending_order = mysqli_query($con,$update_pending_order);
-                
-                        //                     if($run_pending_order){
-                        //                         echo "<script> confirmSuccess(); </script>";
-                        //                     }else{
-                        //                         echo "<script> error(); </script>";
-                        //                     }
-
-
-                        //             }elseif($coupon_pro_id != $product_id){
-                        //                 echo "<script> couponEligible(); </script>";
-
-                        //             }else{
-                        //                 echo "<script> errorVoucher(); </script>";
-                        //             }
-                        //     }
                         
-                   
-                   
-                   
-                   
-                   
-                   
-                   
+                            date_default_timezone_set('Etc/UTC');
+                            $mail = new PHPMailer;
+                    
+                            //$mail->SMTPDebug = 3;                               // Enable verbose debug output
+                    
+                            $mail->isSMTP();                                      // Set mailer to use SMTP
+                            $mail->Host = 'smtp.gmail.com';
+                            // Specify main and backup SMTP servers
+                            $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                            $mail->Username = EMAIL;                 // SMTP username
+                            $mail->Password = PASSWORD;                           // SMTP password
+                            $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                            $mail->Port = 465;  
+                            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;  
+                            // $mail->SMTPOptions = array(
+                            //     'ssl'=>array(
+                            //         'verify_peer'=> false,
+                            //         'verify_peer_name' => false,
+                            //         'allow_self_signed' => true
+                            //     )
+                            // );                              // TCP port to connect to
+                    
+                            $mail->setFrom(EMAIL, 'Apple & Gold');
+                            $mail->addAddress($c_email);     // Add a recipient
+                            // $mail->addAddress('ellen@example.com');               // Name is optional
+                            // $mail->addReplyTo('info@example.com', 'Information');
+                            // $mail->addCC('cc@example.com');
+                            // $mail->addBCC('bcc@example.com');
+                    
+                            // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+                            $mail->isHTML(true);                                  // Set email format to HTML
+                    
+                            
+                    
+                            $mail->Subject = 'Order Confirmation';
+                            $mail->Body    = $output;
+                            //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                    
+                            if(!$mail->send()) {
+                                echo 'Message could not be sent.';
+                                echo 'Mailer Error: ' . $mail->ErrorInfo;
+                            } else {
+                                echo"
+                                        <script>
+                                        confirmSuccess();
+                                    </script>
+                                    
+                                    ";
+                            }
+                                    
+                                    
+                                
+                                
+                        }
+
+
+                        $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";
+                        $run_customer_order = mysqli_query($con,$update_customer_order);
+                        $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
+                        $run_pending_order = mysqli_query($con,$update_pending_order);
+
+                        if($run_pending_order){
+
+                            // echo "<script> confirmSuccess(); </script>";
+                        
+
+                        }else{
+                            echo "<script> error(); </script>";
+                        }
+
+
                     } ?>
 
 

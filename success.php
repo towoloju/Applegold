@@ -1,5 +1,6 @@
 <?php
     session_start();
+    
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
                 icon: 'success',
                 timer:10000,
                 title: 'Payment Successful',
-                text: ' <strong>Kindly confirm your order to begin processing</strong>. If you have any questions do not hesitate to contact us',
+                text: 'Kindly confirm your order to begin processing. If you have any questions do not hesitate to contact us',
                 
             })
         }
@@ -36,7 +37,6 @@
     include("includes/db.php");
     include_once("functions/functions.php");
 
-    //$con = mysqli_connect('localhost','root','','ag_store');
     //get product id, price, and currency
 
     $ip_add = getRealIpUser();
@@ -93,6 +93,6 @@
 
      
 ?>
-        <a href="index.php" class="btn btn-primary">Home</a>
+        <a href="customer/my_account.php?my_orders" class="btn btn-primary">Home</a>
 </body>
 </html>

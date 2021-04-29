@@ -91,6 +91,6 @@
 
      
 ?>
-<a href="index.php" class="btn btn-primary">Home</a>
+<a href="customer/my_account.php?my_orders" class="btn btn-primary">Home</a>
 </body>
 </html>

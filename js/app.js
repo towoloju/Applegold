@@ -1,5 +1,3 @@
-
-
 //SCROLL TO TOP
 $(document).ready(function(){
     $(window).scroll(function(){
@@ -18,6 +16,8 @@ $(document).ready(function(){
     });
 
 });
+
+
 
 
 //FEATURED PRODUCTS SLIDER

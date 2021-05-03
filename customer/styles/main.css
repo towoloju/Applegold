@@ -25,7 +25,7 @@ body{
 /*Top Menu Styles*/
 #top{
     background-color:#3e7cb1;
-    padding: 30px 0px 10px 0px;
+    padding:10px 0;
 }
 
 #top .offer{
@@ -108,14 +108,14 @@ body{
     max-width:450px;
 }
 
-#top .search-loading::after{
+ #top .search-loading::after{
 
     content:"";
     position:absolute;
     top :0;
     left :0;
-    height:2px;
-    background:#fcc000;
+    height:3px;
+    background:#fff;
     border-radius:10px;
     animation: searchIndicator 0.5s infinite ease-in-out;
     margin-left:315px;
@@ -129,8 +129,10 @@ body{
 
 /* #top .navbar-form:focus-within{
     box-shadow:0 0 3px rgba(0, 0, 0, 0.2);
+    margin-left:300px;
 } */
-#top .control-input{
+
+ #top .control{
     background:transparent;
     border-bottom:1px solid #fff;
     font-size:13px;
@@ -140,32 +142,37 @@ body{
     margin-top:-60px;  
    
 }
-#top .input-group .control-input::placeholder{
+
+#top .input-group .control::placeholder{
     color:#fff;
 }
-#top .control-input::before{
+
+#top .control::before{
     content:'';
     display:hidden;
 }
-#top .control-input:focus{
+
+#top .control:focus{
     outline:none;
 }
 
-
 #top .search-result-container{
-    max-height:200px; 
+  
+    max-height:250px; 
     margin-left:300px;
     width:100%;
-    overflow-y: auto;
-    visibility: hidden;
+    overflow-y: auto; 
+/*     
+    visibility: visible;
     opacity:0;
-    transition:visibility 0.1s, opacity 0.1s;
+    transition:visibility 0.1s, opacity 0.1s;  */
 }
 
 #top .search-result-container--visible{
     visibility: visible;
     opacity: 1;
 }
+
 #top .search-result{
     display: block;
     color:#333333;
@@ -183,24 +190,41 @@ body{
 #top .search-result:not(:last-of-type){
     border-bottom: 1px solid #eee;
 }
+
 #top .search-result-title {
     font-size:12px;
     font-weight:bold;
 }
+
 #top .search-result-text{
     line-height: 150%;
     margin:8px 0;
-}
+} 
 
-
-#top .btn-top{
+/* #top .btn-top{
     margin-top:0px;
     background-color:transparent;
     border:transparent;
     font-size:20px;
-    margin-left:-30px;
-}
-@media(max-width:378px){
+    margin-left:270px;
+}  */
+
+
+
+
+
+@media(max-width:380px){
+    #top .search-result-container{
+     
+        margin-left:50px;
+        width:70%;
+    }
+    #top .search-loading::after{
+
+        margin-left:5px;
+    
+      
+    }
     #top .userid{
     width:200px;
     text-align:center;
@@ -212,7 +236,7 @@ body{
     #top .form{
         position:relative;
     }
-   #top .control-input{
+   #top .control{
     font-size:12px;
     width:200px;
     margin-left:60px;

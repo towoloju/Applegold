@@ -1,5 +1,4 @@
-
-    
+  
 
 <h1 align="center" class="confirm-text">Change Password</h1>
 
@@ -15,6 +14,7 @@
         </div>
     </div>
 </form>
+
 
 <?php
 

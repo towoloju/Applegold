@@ -137,7 +137,7 @@
 
         <div class="col span-1-of-3">
             <p>We Accept</p>
-            <img src="/images/Credit-Card-Visa-And-Master-Card-PNG-File.png" alt="">
+            <img src="./images/Credit-Card-Visa-And-Master-Card-PNG-File.png" alt="">
         </div>
         
         <div class="col span-1-of-3">

@@ -548,3 +548,174 @@ PAYPAL MODAL
             </div>
         </div>
     </div>
+
+
+
+//reset_password.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script>
+        function pwdUpdate(){
+            Swal.fire({
+                icon: 'success',
+                title: 'Successful',
+                text: 'Your password has been reset'
+            })
+        }
+
+        function errorPwd(){
+            Swal.fire({
+                icon: 'error',
+                text: 'Password do not match.',
+            })
+        }
+
+        function errorResubmit(){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You need to re-submit your request' 
+            }).then(function(){
+                window.location ='create_new_password.php'
+            })
+        }
+
+        function error(){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Could not validate your resquest' 
+            })
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+<?php
+    if(isset($_POST['reset_password_submit'])){
+
+        $selector = $_POST['selector'];
+        $validator = $_POST['validator'];
+        $pwd = $_POST['pwd'];
+        $pwd_repeat = $_POST['pwd_confirm'];
+
+        if(empty($pwd) || empty($pwd_repeat)){
+            header('Location: create_new_password.php');
+            exit();
+        }else if($pwd != $pwd_repeat){
+            echo "<script> errorPwd(); </script>";
+            exit(); 
+
+        }
+        
+
+        $current_date = date("U");
+
+        include('includes/db.php');
+
+        $sql = "SELECT * FROM pwd_reset WHERE pwd_reset_selector = ? AND pwd_reset_expire >= $current_date";
+
+        $stmt = mysqli_stmt_init($con); //initialize connectinon from db
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "<script> error(); <script>";
+            exit();
+        }else {
+            mysqli_stmt_bind_param($stmt, "s", $selector); //what the '?' should be replaced with before executing the statement ie string 's'
+
+            mysqli_stmt_execute($stmt);
+
+            $result = mysqli_stmt_get_result($stmt);
+
+            if(!$row = mysqli_fetch_assoc($result)){ // insert data inside associate array
+                 echo "<script> errorResubmit(); </script>";
+                 exit();
+            }else{
+
+                $token_bin = hex2bin($validator);
+                $token_check = password_verify($token_bin, $row['pwd_reset_token']);
+
+                if($token_check === false){
+                    echo "<script> errorResubmit(); </script>";
+                    exit();
+
+                }elseif($token_check === true){
+                    
+                    $token_email = $row['pwd_reset_email'];
+
+                    $sql = "SELECT * FROM customer WHERE email=?;";
+
+                    $stmt = mysqli_stmt_init($con); //initialize connectinon from db
+
+                    if(!mysqli_stmt_prepare($stmt, $sql)){
+                        echo "<script> error(); <script>";
+                        exit();
+                    }else {
+                        mysqli_stmt_bind_param($stmt, "s", $token_email);
+
+                        mysqli_stmt_execute($stmt);
+
+                        $result = mysqli_stmt_get_result($stmt);
+
+                        if(!$row = mysqli_fetch_assoc($result)){ // insert data inside associate array
+                            echo "<script> error(); </script>";
+                            exit();
+                        }else{
+                            //update password in customer table
+                            $sql = "UPDATE customer SET password=? WHERE email=?";
+
+                            $stmt = mysqli_stmt_init($con); //initialize connectinon from db
+
+                            if(!mysqli_stmt_prepare($stmt, $sql)){
+                                echo "<script> error(); <script>";
+                                exit();
+                            }else {
+                                $new_pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
+                                mysqli_stmt_bind_param($stmt, "ss", $new_pwd_hash, $token_email);
+
+                                mysqli_stmt_execute($stmt);
+
+                                $sql = "DELETE FROM pwd_reset WHERE pwd_reset_email=?";
+
+                                $stmt = mysqli_stmt_init($con); //initialize connectinon from db
+
+                                if(!mysqli_stmt_prepare($stmt, $sql)){
+                                    echo "<script> error(); <script>";
+                                    exit();
+                                }else {
+                                    mysqli_stmt_bind_param($stmt, "s", $token_email);
+                                    $execute= mysqli_stmt_execute($stmt);
+                                    if($execute==true){
+                                        echo "<script> pwdUpdate(); <script>";
+                                    }
+                                   
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+
+
+
+
+    }else{
+        header('Location: index.php');
+    }
+    
+
+
+?>

@@ -256,7 +256,15 @@ body{
     }  
 }
 
-
+/* PASSWORD RESET*/
+.form-reset-container{
+    margin-top:100px;
+    margin-left:400px;
+    width:70%;
+}
+.form-reset-container .form-control{
+    margin-bottom:20px;
+}
 
 
 /*Header Styles*/

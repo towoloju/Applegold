@@ -363,7 +363,7 @@
                                             </div>
                                             <div class="reset">
                                                 <p>Forgot Password?</p>
-                                                <a href="customer/change_p.php" class="btn btn-danger btn-reset">
+                                                <a href="reset.php" class="btn btn-danger btn-reset">
                                                     <i class="fa fa-key"></i> Reset Password
                                                 </a> 
                                             </div>

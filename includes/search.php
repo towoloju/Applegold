@@ -29,7 +29,7 @@
 
                 $product_price = $row['product_price'];
 
-                $output .= " <a href='#' class='search-result'>
+                $output .= " <a href='shop.php' class='search-result'>
                                     <div class='search-result-title'>" .$product_title. "</div>
                                     <p class='search-result-text'>" .$product_model. "</p>
                                     <p class='search-result-text'> &#36; " .$product_price. "</p>

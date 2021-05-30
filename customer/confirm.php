@@ -107,6 +107,19 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
     <script src="js/app.js"></script>
+    <script type="text/javascript">
+        //SEARCH BAR
+
+        function searchq(){
+            //collect the value of the input field with .val()
+            var searchText = $("input[name='search']").val();
+
+            $.post("includes/search.php", {searchVal: searchText}, function(output){
+                $("#output").html(output);  
+            });
+        }
+    </script>
+    
     
 
     
@@ -132,11 +145,16 @@
                     ?>
                 </a>  
                 <form class="navbar-form navbar-left form  navbar-collapse collapse" id="search">
-                    <div class="input-group">
-                        <input type="text" class="control" aria-label="..." placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-info btn-top"  type="submit"><i class="fa fa-search"></i></button>
-                        </div>
+                   
+                     <div class="input-group"> <!---input container-->
+                        <input type="text" class="control search-input" name="search" onkeydown="searchq();" placeholder="Search mouse, keyboard..."> <!---search input-->
+                        <!-- <div class="input-group-btn">
+                            <button class="btn btn-info btn-top" name="submit"  type="submit"><i class="fa fa-search"></i></button>
+                        </div> -->
+                    </div>
+                      
+                    <div class="search-result-container" id="output">
+
                     </div>
                 </form>
            

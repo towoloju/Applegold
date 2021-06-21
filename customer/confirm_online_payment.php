@@ -425,8 +425,8 @@
             <div class="navbar-header"> <!---navbar headerstarts-->
 
                 <a href="index.php" class="navbar-brand home"> <!----Navbar brand starts-->
-                    <img src="images/mainlogo.jpg" alt="AG-logo" class="hidden-xs">
-                    <img src="images/mobilelogo.jpg" alt="AG-logo Mobile" class="visible-xs"> 
+                    <img src="images/mainlogo.png" alt="AG-logo" class="hidden-xs">
+                    <img src="images/mobilelogo.png" alt="AG-logo Mobile" class="visible-xs"> 
                 </a> <!----Navbar brand ends-->
 
                 <button class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -671,7 +671,7 @@
                                 $mail->Password = PASSWORD;                           // SMTP password
                                 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
                                 $mail->Port = 465;  
-                                $mail->SMTPDebug = SMTP::DEBUG_SERVER;  
+                                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;  
                                 // $mail->SMTPOptions = array(
                                 //     'ssl'=>array(
                                 //         'verify_peer'=> false,

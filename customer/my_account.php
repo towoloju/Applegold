@@ -289,9 +289,9 @@ $active="Account";
         <div class="container"> <!---Container starts-->
             <div class="navbar-header"> <!---navbar headerstarts-->
 
-                <a href="index.php" class="navbar-brand home"> <!----Navbar brand starts-->
-                    <img src="images/mainlogo.jpg" alt="AG-logo" class="hidden-xs">
-                    <img src="images/mobilelogo.jpg" alt="AG-logo Mobile" class="visible-xs"> 
+                <a href="../index.php" class="navbar-brand home"> <!----Navbar brand starts-->
+                    <img src="images/mainlogo.png" alt="AG-logo" class="hidden-xs">
+                    <img src="images/mobilelogo.png" alt="AG-logo Mobile" class="visible-xs"> 
                 </a> <!----Navbar brand ends-->
 
                 <button class="navbar-toggle" data-toggle="collapse" data-target="#navigation">

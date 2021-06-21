@@ -21,6 +21,11 @@
 
     $receipt_no = mt_rand(); //Random numbers//
 
+    $get_otp = "SELECT * FROM otp_on_delivery WHERE ip_add = '$ip_add'";
+    $run_otp = mysqli_query($con,$get_otp);
+    $row_otp = mysqli_fetch_array($run_otp);
+    $otp_pin = $row_otp['otp'];
+
     $select_cart = "select * from cart where ip_add='$ip_add'";
 
     $run_cart = mysqli_query($con,$select_cart);
@@ -36,8 +41,8 @@
         //while($row_product = mysqli_fetch_array($run_product)){
             $sub_total = $price * $pro_quantity;
             
-            $insert_customer_order = "insert into customer_orders (customer_id,amount,receipt_no,quantity,model,order_date,order_status)
-             values ('$customer_id','$sub_total','$receipt_no','$pro_quantity','$pro_model',NOW(),'$status')";
+            $insert_customer_order = "insert into customer_orders (customer_id,amount,receipt_no,quantity,model,otp,order_date,order_status)
+             values ('$customer_id','$sub_total','$receipt_no','$pro_quantity','$pro_model','$otp_pin',NOW(),'$status')";
             
             $run_customer_order = mysqli_query($con,$insert_customer_order);
 

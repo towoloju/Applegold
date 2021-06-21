@@ -44,6 +44,23 @@
                                         text: 'You are not signed in, Sign in to continue'
                                     })
                                 }
+                                function confirmSuccess(){
+                                    Swal.fire({
+                                        title: 'Successful',
+                                        text: 'Thank you for purchasing, your order will be completed within 24 hours',
+                                        icon: 'success'
+                                    }).then(function(){
+                                        window.location = 'checkout.php'
+                                    });
+                    
+                                }
+                                function error(){
+                                Swal.fire({
+                                    title: 'Oops ...',
+                                    text: 'Something went wrong',
+                                    icon: 'error'
+                                })
+                            }
                             
                         </script>
         

@@ -40,11 +40,13 @@
                     
 
         ?>
+      
 
         <div class="options">
             <h2>Payment Options</h2>
             <p class="lead">
                 <a href="order.php?c_id=<?php echo $customer_id; ?>">Pay on Delivery</a>
+                <a href='otp.php?c_id=<?php echo $customer_id; ?>' target='_blank' class="btn btn-primary btn-sm" style="width:70px; margin-top:-5px; magrign-left:-10px;">Get OTP</a>
             </p>
 
             <p class="lead">

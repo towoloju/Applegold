@@ -21,7 +21,7 @@
 
     $receipt_no = mt_rand(); //Random numbers//
 
-    $get_otp = "SELECT * FROM otp_on_delivery WHERE ip_add = '$ip_add'";
+    $get_otp = "SELECT * FROM otp_on_delivery order by 1 DESC LIMIT 1";
     $run_otp = mysqli_query($con,$get_otp);
     $row_otp = mysqli_fetch_array($run_otp);
     $otp_pin = $row_otp['otp'];

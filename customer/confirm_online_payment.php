@@ -557,7 +557,7 @@
                                     <select name="payment_mode" class="control">
                                         <option disabled>Pay On Delivery</option>
                                         <option selected>Pay Online</option>
-                                        <option disabled>Voucher Code</option>
+                                        
                                     </select>
                                     <input type ="text" class="control" name="voucher_code" placeholder="Voucher Code">
 
@@ -657,7 +657,7 @@
 
                             if($run_payment==true){
                                     
-                            
+                                //MAIL TO CUSTOMER
                                 date_default_timezone_set('Etc/UTC');
                                 $mail = new PHPMailer;
                         
@@ -672,23 +672,11 @@
                                 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
                                 $mail->Port = 465;  
                                 //$mail->SMTPDebug = SMTP::DEBUG_SERVER;  
-                                // $mail->SMTPOptions = array(
-                                //     'ssl'=>array(
-                                //         'verify_peer'=> false,
-                                //         'verify_peer_name' => false,
-                                //         'allow_self_signed' => true
-                                //     )
-                                // );                              // TCP port to connect to
+                             
                         
                                 $mail->setFrom(EMAIL, 'Apple & Gold');
                                 $mail->addAddress($c_email);     // Add a recipient
-                                // $mail->addAddress('ellen@example.com');               // Name is optional
-                                // $mail->addReplyTo('info@example.com', 'Information');
-                                // $mail->addCC('cc@example.com');
-                                // $mail->addBCC('bcc@example.com');
-                        
-                                // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-                                // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+                               
                                 $mail->isHTML(true);                                  // Set email format to HTML
                         
                                 
@@ -708,6 +696,54 @@
                                         
                                         ";
                                 }
+
+
+
+                                //MAIL TO ADMIN
+                                $get_admin = "Select * from admins where admin_position = 'Manager'";
+                                $run_admin = mysqli_query($con,$get_admin);
+                                $row_admin = mysqli_fetch_array($run_admin);
+                                $admin_name = $row_admin['admin_name'];
+                                $admin_email = $row_admin['admin_email'];
+                                $message = '<div>
+                                            <h1>New Order</h1>
+                                            <p>Hello'    .$admin_name. '</p>
+                                            <p>A new order has been placed for PAYMENT ONLINE, please login to the admin dashboard to view and process the order.</p>
+                                            
+                                        </div>'  ; 
+
+                                //MAIL TO ADMIN
+                                $mail2 = new PHPMailer;                        
+                                $mail2->isSMTP();                                      // Set mailer to use SMTP
+                                $mail2->Host = 'smtp.gmail.com';
+                                // Specify main and backup SMTP servers
+                                $mail2->SMTPAuth = true;                               // Enable SMTP authentication
+                                $mail2->Username = EMAIL;                 // SMTP username
+                                $mail2->Password = PASSWORD;                           // SMTP password
+                                $mail2->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                                $mail2->Port = 465;  
+                                //$mail2->SMTPDebug = SMTP::DEBUG_SERVER;  
+                                                         
+                                $mail2->setFrom(EMAIL, 'Apple & Gold');
+                                $mail2->addAddress($admin_email);     // Add a recipient                               
+                                $mail2->isHTML(true);                                
+                                $mail2->Subject = 'new Order';
+                                $mail2->Body    = $message;
+                                //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                        
+                                if(!$mail2->send()) {
+                                    echo 'Message could not be sent.';
+                                    echo 'Mailer Error: ' . $mail2->ErrorInfo;
+                                } else {
+                                    echo"
+                                            <script>
+                                            confirmSuccess();
+                                        </script>
+                                        
+                                        ";
+                                }
+                                        
+                                    
                                         
                                         
                                     

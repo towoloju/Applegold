@@ -547,6 +547,8 @@
                 $price = $row_values['amount']/100;
 
                 $otp_pin = $row_values['otp'];
+
+
                             
                     
             
@@ -567,7 +569,7 @@
                                     </select>
                                     <input type ="text" class="control" name="voucher_code" placeholder="Voucher Code">
 
-                                    <input type ="text" class="control" name="otp" placeholder="OTP" maxlength='6'>
+                                    <input type ="text" class="control" name="otp" placeholder="OTP" maxlength='10'>
 
 
                                     <input type ="text" class="control" name="payment_date" placeholder="Payment Date(yyyy-mm-dd)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"  required>
@@ -661,15 +663,13 @@
                         $complete = "complete";
                         $c_email = $_SESSION['email'];
 
-                        if($otp_pin != $otp){
-                            echo "<script> errorOtp(); </script>";
-                        }else{
+                     
                             $insert_payment = "insert into payment (customer_email,receipt_no,amount,payment_mode,voucher_code,otp,payment_date)
                             values ('$c_email','$pro_receipt','$pro_amount','$payment_mode','$code','$otp','$payment_date')";
 
                             $run_payment = mysqli_query($con,$insert_payment);
 
-                        
+                            
                             $output = '<div>
                                             <h1>We appreciate your patronage</h1>
                                             <p>Dear'    .$c_email. '</p>
@@ -677,14 +677,16 @@
                                             
                                         </div>'  ; 
 
+                           
+                         
+
                             if($run_payment==true){
+                               
                                     
-                            
+                               //MAIL TO CUSTOMER
                                 date_default_timezone_set('Etc/UTC');
                                 $mail = new PHPMailer;
-                        
                                 //$mail->SMTPDebug = 3;                               // Enable verbose debug output
-                        
                                 $mail->isSMTP();                                      // Set mailer to use SMTP
                                 $mail->Host = 'smtp.gmail.com';
                                 // Specify main and backup SMTP servers
@@ -693,35 +695,60 @@
                                 $mail->Password = PASSWORD;                           // SMTP password
                                 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
                                 $mail->Port = 465;  
-                                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;  
-                                // $mail->SMTPOptions = array(
-                                //     'ssl'=>array(
-                                //         'verify_peer'=> false,
-                                //         'verify_peer_name' => false,
-                                //         'allow_self_signed' => true
-                                //     )
-                                // );                              // TCP port to connect to
-                        
+                                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                  
                                 $mail->setFrom(EMAIL, 'Apple & Gold');
                                 $mail->addAddress($c_email);     // Add a recipient
-                                // $mail->addAddress('ellen@example.com');               // Name is optional
-                                // $mail->addReplyTo('info@example.com', 'Information');
-                                // $mail->addCC('cc@example.com');
-                                // $mail->addBCC('bcc@example.com');
-                        
-                                // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-                                // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-                                $mail->isHTML(true);                                  // Set email format to HTML
-                        
-                                
-                        
+                                $mail->isHTML(true);                                
                                 $mail->Subject = 'Order Confirmation';
                                 $mail->Body    = $output;
-                                //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-                        
+                                //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';                     
                                 if(!$mail->send()) {
                                     echo 'Message could not be sent.';
                                     echo 'Mailer Error: ' . $mail->ErrorInfo;
+                                } else {
+                                    echo"
+                                            <script>
+                                            confirmSuccess();
+                                        </script>
+                                        
+                                        ";
+                                }
+
+
+                                $get_admin = "Select * from admins where admin_position = 'Manager'";
+                                $run_admin = mysqli_query($con,$get_admin);
+                                $row_admin = mysqli_fetch_array($run_admin);
+                                $admin_name = $row_admin['admin_name'];
+                                $admin_email = $row_admin['admin_email'];
+                                $message = '<div>
+                                            <h1>New Order</h1>
+                                            <p>Hello'    .$admin_name. '</p>
+                                            <p>A new order has been placed for PAYMENT ON DELIVERY, please login to the admin dashboard to view and process the order.</p>
+                                            
+                                        </div>'  ; 
+
+                                //MAIL TO ADMIN
+                                $mail2 = new PHPMailer;                        
+                                $mail2->isSMTP();                                      // Set mailer to use SMTP
+                                $mail2->Host = 'smtp.gmail.com';
+                                // Specify main and backup SMTP servers
+                                $mail2->SMTPAuth = true;                               // Enable SMTP authentication
+                                $mail2->Username = EMAIL;                 // SMTP username
+                                $mail2->Password = PASSWORD;                           // SMTP password
+                                $mail2->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                                $mail2->Port = 465;  
+                                //$mail2->SMTPDebug = SMTP::DEBUG_SERVER;  
+                                                         
+                                $mail2->setFrom(EMAIL, 'Apple & Gold');
+                                $mail2->addAddress($admin_email);     // Add a recipient                               
+                                $mail2->isHTML(true);                                
+                                $mail2->Subject = 'new Order';
+                                $mail2->Body    = $message;
+                                //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                        
+                                if(!$mail2->send()) {
+                                    echo 'Message could not be sent.';
+                                    echo 'Mailer Error: ' . $mail2->ErrorInfo;
                                 } else {
                                     echo"
                                             <script>
@@ -742,17 +769,22 @@
                             $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
                             $run_pending_order = mysqli_query($con,$update_pending_order);
 
-                            if($run_pending_order){
+                          
+                    
 
-                                // echo "<script> confirmSuccess(); </script>";
-                            
-
-                            }else{
-                                echo "<script> error(); </script>";
-                            }
+                                if($run_pending_order){
+                                    
+                                    
 
 
-                        } 
+                                    
+                                        
+                                }else{
+                                    echo "<script> error(); </script>";
+                                }
+
+
+                        
                     }
                     ?>
 

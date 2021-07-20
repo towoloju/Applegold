@@ -886,7 +886,7 @@ function getProducts(){
         if($pro_label=='sale'){
 
             echo"
-                <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:20px;'>
+                <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:10px;'>
                     <div class='product-grid'>
                         <div class='product-image'>
                             <a href='details.php?pro_id=$pro_id'>
@@ -917,7 +917,7 @@ function getProducts(){
         }elseif($pro_label=='new'){
                 
         echo"
-            <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:20px;'>
+            <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:10px;'>
                 <div class='product-grid'>
                     <div class='product-image'>
                         <a href='details.php?pro_id=$pro_id'>
@@ -947,7 +947,7 @@ function getProducts(){
 
         }elseif($pro_discount!=0){
             echo"
-                <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:20px;'>
+                <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:10px;'>
                     <div class='product-grid'>
                         <div class='product-image'>
                             <a href='details.php?pro_id=$pro_id'>
@@ -977,7 +977,7 @@ function getProducts(){
             ";
         }else{
             echo"
-            <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:20px;'>
+            <div class='col-md-4 col-sm-6 center-responsive' style='margin-top:10px;'>
                 <div class='product-grid'>
                     <div class='product-image'>
                         <a href='details.php?pro_id=$pro_id'>

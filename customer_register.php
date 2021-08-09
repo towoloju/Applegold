@@ -125,8 +125,18 @@ if(isset($_POST['register'])){
     }else{
         $insert_customer = "insert into customer (profile_image,first_name,last_name,email,phone_number,address,region,postal_code,password,customer_ip,verified,token) 
         values ('$c_image','$c_firstname',' $c_lastname','$c_email','$c_phonenumber','$c_address','$c_region','$c_postalcode','$c_password','$c_ip','$verified','$token')";
+        $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+        $cleardb_server = $cleardb_url["host"];
+        $cleardb_username = $cleardb_url["user"];
+        $cleardb_password = $cleardb_url["pass"];
+        $cleardb_db = substr($cleardb_url["path"],1);
+        $active_group = 'default';
+        $query_builder = TRUE;
+    
+        // $db = mysqli_connect("localhost","root","","ag_store");
+        $con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 
-        $con = mysqli_connect("localhost", "root", "", "ag_store");
+        // $con = mysqli_connect("localhost", "root", "", "ag_store");
 
 
         $run_customer = mysqli_query($con,$insert_customer);

@@ -68,8 +68,18 @@
             <h5>Top Product Categories</h5>
             <ul>
                 <?php
+                $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+                $cleardb_server = $cleardb_url["host"];
+                $cleardb_username = $cleardb_url["user"];
+                $cleardb_password = $cleardb_url["pass"];
+                $cleardb_db = substr($cleardb_url["path"],1);
+                $active_group = 'default';
+                $query_builder = TRUE;
+            
+                // $db = mysqli_connect("localhost","root","","ag_store");
+                $con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 
-                $con = mysqli_connect("localhost", "root", "", "ag_store");
+                // $con = mysqli_connect("localhost", "root", "", "ag_store");
 
                 $get_p_category = "select * from product_category where p_cat_top='yes'";
                 $run_p_category = mysqli_query($con,$get_p_category);
@@ -206,7 +216,18 @@
                 <ul>
                 <?php
 
-                    $con = mysqli_connect("localhost", "root", "", "ag_store");
+                    $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+                    $cleardb_server = $cleardb_url["host"];
+                    $cleardb_username = $cleardb_url["user"];
+                    $cleardb_password = $cleardb_url["pass"];
+                    $cleardb_db = substr($cleardb_url["path"],1);
+                    $active_group = 'default';
+                    $query_builder = TRUE;
+
+                    // $db = mysqli_connect("localhost","root","","ag_store");
+                    $con = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+
+                    // $con = mysqli_connect("localhost", "root", "", "ag_store");
 
                     $get_p_category = "select * from product_category";
                     $run_p_category = mysqli_query($con,$get_p_category);

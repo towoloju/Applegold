@@ -91,11 +91,11 @@ CREATE TABLE `boxes` (
 --
 
 INSERT INTO `boxes` (`box_id`, `box_title`, `box_desc`, `box_url`, `box_image`) VALUES
-(3, 'Projectors  ', 'Play and watch your favorite TV shows with these projectors', 'http://localhost/applegold/shop.php?p_category=4', 'projector-428665_1280.jpg'),
-(4, 'Audio', 'Get the best deals for professional audio equipment', 'http://localhost/applegold/shop.php?category=3', 'indoors-1869560_1280.jpg'),
-(5, 'Accessories', 'Our various accessories have the best experience', 'http://localhost/applegold/shop.php?p_category=1', 'bag-1853847_1280.jpg'),
-(8, 'Speakers ', 'Our selection of premium headphones to select your favorite audio with an incredible sound', 'http://localhost/applegold/shop.php?p_category=2', 'gallery-1.jpg'),
-(9, 'Headphones', 'Our selection of premium headphones to select your favorite audio with an incredible sound', 'http://localhost/applegold/shop.php?category=3', 'headphones-820341_1280.jpg');
+(3, 'Projectors  ', 'Play and watch your favorite TV shows with these projectors', '/applegold/shop.php?p_category=4', 'projector-428665_1280.jpg'),
+(4, 'Audio', 'Get the best deals for professional audio equipment', '/applegold/shop.php?category=3', 'indoors-1869560_1280.jpg'),
+(5, 'Accessories', 'Our various accessories have the best experience', '/applegold/shop.php?p_category=1', 'bag-1853847_1280.jpg'),
+(8, 'Speakers ', 'Our selection of premium headphones to select your favorite audio with an incredible sound', '/applegold/shop.php?p_category=2', 'gallery-1.jpg'),
+(9, 'Headphones', 'Our selection of premium headphones to select your favorite audio with an incredible sound', '/applegold/shop.php?category=3', 'headphones-820341_1280.jpg');
 
 -- --------------------------------------------------------
 
@@ -530,10 +530,10 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`slide_id`, `slide_name`, `slide_image`, `slide_title`, `slide_caption`, `slide_link`, `slide_url`) VALUES
-(2, 'Slide 2', 'slide1.jpg', 'New JBL Home Theatres', 'Discover premium quality speakers by JBL', 'Shop Speakers', 'http://localhost/applegold/shop.php?p_category=3'),
-(3, 'Slide 3', 'slide3.jpg', 'The Headphone Collection', 'Discover premium quality headphones', 'Shop Headphones', 'http://localhost/applegold/shop.php?category=4'),
-(7, 'Slide 4', 'slide.jpg', 'Best Performing Products', 'Our mission is to provide the best experience for the audio/video industry', 'Shop All', 'http://localhost/applegold/shop.php?category=2'),
-(8, 'Slide 1', 'slidetv.jpg', 'Introducing brand new TV OLEDs', 'Discover premium quality TVs', 'Shop OLEDs', 'http://localhost/applegold/shop.php?p_category=1');
+(2, 'Slide 2', 'slide1.jpg', 'New JBL Home Theatres', 'Discover premium quality speakers by JBL', 'Shop Speakers', '/applegold/shop.php?p_category=3'),
+(3, 'Slide 3', 'slide3.jpg', 'The Headphone Collection', 'Discover premium quality headphones', 'Shop Headphones', '/applegold/shop.php?category=4'),
+(7, 'Slide 4', 'slide.jpg', 'Best Performing Products', 'Our mission is to provide the best experience for the audio/video industry', 'Shop All', '/applegold/shop.php?category=2'),
+(8, 'Slide 1', 'slidetv.jpg', 'Introducing brand new TV OLEDs', 'Discover premium quality TVs', 'Shop OLEDs', '/applegold/shop.php?p_category=1');
 
 -- --------------------------------------------------------
 
